@@ -1,0 +1,12 @@
+<div class="container border rounded shadow-sm p-4 mb-3">
+  <h5 class="text-primary mb-3">Datos de cuenta</h5>
+  <p class="fs-5">Saldo disponible: <span class="fw-bold text-success">${{ currentAmount | number: '1.0-0' }}</span></p>
+  <button (click)="openModal()" class="btn btn-primary">Abrir Historial</button>
+  <app-record [title]="'Historial'" [isOpen]="isModalOpen">
+    <div *ngFor="let record of records">
+      <p>{{ record?.dateCreated | date }}</p>
+      <p>{{ record?.openingAmount }}</p>
+    </div>
+  </app-record>
+</div>
+

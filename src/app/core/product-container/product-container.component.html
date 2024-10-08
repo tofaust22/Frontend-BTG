@@ -1,0 +1,9 @@
+<div class="container">
+  <div class="text">Tus productos</div>
+  <br/>
+  <div class="row">
+    <div class="col-md-4 mb-5" *ngFor="let product of userProducts">
+      <app-productltem-component [product]="product" [userProduct]="userProduct"></app-productltem-component>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<div class="card text-center">
+  <div class="card-header">
+    {{ product?.name }}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Tu saldo</h5>
+    <p class="card-text" *ngIf="active">
+      ${{ openingAmount | number: '1.0-0' }}
+    </p>
+
+
+    <div *ngIf="!active">
+      <label for="openingAmountInput">Valor de apertura:</label>
+      <input
+        [min]="minAmount"
+        type="number"
+        [(ngModel)]="openingAmount"
+        class="form-control"
+        id="openingAmountInput"
+        placeholder="Ingresa el monto de apertura"
+      >
+      <div *ngIf="openingAmount < minAmount" class="text-danger">
+        El monto de apertura no puede ser menor a {{ minAmount }}.
+      </div>
+      <div *ngIf="currentAmount < openingAmount" class="text-danger">
+        Fondo insuficiente. Tu saldo actual es ${{ currentAmount | number: '1.0-0' }}.
+      </div>
+    </div>
+
+    <!-- Botón de unirme/retirarme -->
+    <button
+      class="btn mt-3"
+      [disabled]="openingAmount < minAmount && !active"
+      [ngClass]="active ? 'btn-danger' : 'btn-success'"
+            (click)="toggleActive(!active, product?.id)">
+      {{ active ? 'Retirarme' : 'Unirme' }}
+    </button>
+    <!-- <p class="card-text">${{ openingAmount | number: '1.0-0'  }}</p>
+    <button class="btn" [ngClass]="product?.active ? 'btn-danger' : 'btn-success'"
+      (click)="toggleActive()">
+      {{ product?.active ? 'Retirarme' : 'Unirme' }}
+    </button> -->
+  </div>
+</div>
